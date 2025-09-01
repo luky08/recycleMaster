@@ -45,7 +45,6 @@
 .progress {
   background: linear-gradient(to right, #96c93d, #00b09b);
   height: 100%;
-  width: 60%;
   transition: width 0.3s ease;
 }
 

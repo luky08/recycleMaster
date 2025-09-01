@@ -1,5 +1,5 @@
 import './TaskRow.css'
-function TaskRow({imgUrl, lvl, taskName, weight, time, price}) {
+function TaskRow({widthProgress, imgUrl, lvl, taskName, weight, time, price}) {
     return(
         <div className="main-row">
           <div
@@ -19,7 +19,7 @@ function TaskRow({imgUrl, lvl, taskName, weight, time, price}) {
             <div className="progress-bar">
               
                 <div
-                  className="progress"
+                  className="progress" style={{ width: `${widthProgress}%` }}
                 ></div>
             </div>
           </div>
