@@ -1,0 +1,14 @@
+.tabs {
+    display: flex;
+  }
+  .tab {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    cursor: pointer;
+    background-color: #2f4f4f;
+    color: white;
+  }
+  .tab.active {
+    background-color: #84b431;
+  }

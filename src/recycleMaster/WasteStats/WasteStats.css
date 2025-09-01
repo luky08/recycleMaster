@@ -1,0 +1,14 @@
+.main-panel {
+    display: flex;
+}
+.main-panel img {
+    width: 40%;
+}
+
+.btn-add-waste {
+    padding: 10px;
+    background-color: #99cc00;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
