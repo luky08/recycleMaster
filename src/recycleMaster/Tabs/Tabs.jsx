@@ -7,11 +7,11 @@ function Tabs(){
         <div>
             <div className="tabs">
                 <NavLink
-                to="/resorting"
+                to="/resort"
                 className={({ isActive }) => `tab ${isActive ? "active" : "inactive"}`}
                 end
                 >
-                ReSorting
+                ReSort
                 </NavLink>
                 <NavLink
                 to="/recraft"

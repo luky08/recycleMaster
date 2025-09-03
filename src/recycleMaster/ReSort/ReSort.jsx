@@ -1,7 +1,7 @@
-import './ReSorting.css'
+import './ReSort.css'
 import TaskRow from '../Task/TaskRow'
 
-function WasteSorting() {
+function ReSort() {
     return(
         <>
         <TaskRow widthProgress="15" imgUrl="/assets/ReCar.png" lvl="1" taskName="Transport of waste to the sorting facility" weight1="8" time="2" price="25"/>
@@ -10,4 +10,4 @@ function WasteSorting() {
     )
 }
 
-export default WasteSorting;
+export default ReSort;
