@@ -1,0 +1,44 @@
+.main-row.store .text {
+  display: flex;
+  margin-bottom: 5px;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.main-row.store .text div:last-child {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column-reverse;
+}
+button {
+  background-color: #A9C93F;
+  color: #fff;
+  border: none;
+  padding: 5px 15px;
+  margin: 3px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+button:hover {
+  background-color: #B7D954;
+  transform: scale(1.02);
+}
+.sell-all {
+  background-color: #d9534f;
+}
+
+.sell-all:hover {
+  background-color: #e57373;
+}
+
+.sell-all:active {
+  background-color: #c9302c;
+}
+
+button:active {
+  background-color: #90AF3C;
+  transform: scale(0.98);
+}
