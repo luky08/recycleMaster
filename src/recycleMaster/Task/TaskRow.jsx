@@ -1,11 +1,11 @@
 import './TaskRow.css'
-function TaskRow({widthProgress, imgUrl, lvl, taskName, time, price, weight1, trashName1, weight2, trashName2}) {
+function TaskRow({widthProgress, imgUrl, imgAlt, lvl, taskName, time, price, weight1, trashName1, weight2, trashName2}) {
     return(
         <div className="main-row">
           <div
             className="left"
           >
-            <img src={imgUrl} alt="Převoz odpadu" />
+            <img src={imgUrl} alt={imgAlt} />
           </div>
           <div className="middle">
             <div className="text">
