@@ -1,5 +1,5 @@
 import './TaskRow.css'
-function TaskRow({widthProgress, imgUrl, lvl, taskName, weight, time, price}) {
+function TaskRow({widthProgress, imgUrl, lvl, taskName, time, price, weight1, trashName1, weight2, trashName2}) {
     return(
         <div className="main-row">
           <div
@@ -10,10 +10,10 @@ function TaskRow({widthProgress, imgUrl, lvl, taskName, weight, time, price}) {
           <div className="middle">
             <div className="text">
               <div>
-                {lvl} - {taskName}
+                {lvl} lvl - {taskName}
               </div>
               <div>
-                {weight} kg <span> {time} min </span>
+                {weight1} kg {trashName1 && `(${trashName1})`} {weight2 && `${weight2} kg (${trashName2})`}  <span> &nbsp;{time} min </span>
               </div>
             </div>
             <div className="progress-bar">
