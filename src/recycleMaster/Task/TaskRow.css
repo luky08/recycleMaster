@@ -1,10 +1,10 @@
 .main-row {
   display: flex;
   align-items: center;
-  background-color: #354b3e;
+  background-color: #2f4f4f;
   padding: 10px;
   border-radius: 10px;
-  margin: 10px 0;
+  margin: 6px 6px;
   color: white;
   font-family: 'Arial', sans-serif;
   font-size: 14px;
@@ -21,6 +21,9 @@
 .middle {
   flex-grow: 1;
   margin: 0 10px;
+}
+.middle .text div:first-child{
+    width: 80%;
 }
 .middle .text div:last-child {
     display: flex;
