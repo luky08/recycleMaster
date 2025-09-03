@@ -1,14 +1,26 @@
-.main-panel {
-    display: flex;
-}
-.main-panel img {
-    width: 40%;
+.waste-summary {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #2f4235; /* tmavě zelené pozadí */
+  padding: 10px 10px;
+  font-family: 'Segoe UI', sans-serif;
+  color: #fff;
 }
 
-.btn-add-waste {
-    padding: 10px;
-    background-color: #99cc00;
-    border: none;
-    color: white;
-    cursor: pointer;
+.bin, .coin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.bin img, .coin img {
+  width: 25px;
+  height: auto;
+}
+
+.coin img {
+    width: 34px;
 }
