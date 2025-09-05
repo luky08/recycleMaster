@@ -9,3 +9,9 @@ a {
 #root {
     background-color: #354b3e;
 }
+@media screen and (min-width: 1367px) {
+    #root {
+        max-width: 550px;
+        margin: auto;
+    }
+}
