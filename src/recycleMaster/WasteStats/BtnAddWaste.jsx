@@ -5,3 +5,5 @@ function BtnAddWaste(){
         </button>
     )
 }
+
+export default BtnAddWaste;
