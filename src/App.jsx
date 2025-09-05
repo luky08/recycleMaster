@@ -4,13 +4,14 @@ import ReSort from './recycleMaster/ReSort/ReSort';
 import Tabs from './recycleMaster/Tabs/Tabs';
 import ReCraft from './recycleMaster/ReCraft/ReCraft';
 import ReStore from './recycleMaster/ReStore/ReStore';
+import WasteStats from './recycleMaster/WasteStats/WasteStats';
 
 function App() {
 
   return (
     <>
       <Router>
-        
+        <WasteStats/>
       <Tabs/>
       <Routes>
         <Route path="/resort" element={<ReSort/>} />
