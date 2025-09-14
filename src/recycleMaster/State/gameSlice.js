@@ -32,9 +32,6 @@ const gameSlice = createSlice({
         state.plastic += s1;
         state.glass += s2 - s1;
         state.paper += 8 - s2;
-
-        console.log(s1);
-        console.log(s2);
       }
     },
   },

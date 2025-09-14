@@ -29,6 +29,7 @@ function TaskRow({
             <img src={imgUrl} alt={imgAlt} />
           </div>
           <div 
+            onClick={handleClick}
             className="middle"
             >
             <div className="text">
