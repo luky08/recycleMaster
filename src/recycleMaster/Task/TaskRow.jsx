@@ -1,13 +1,36 @@
 import './TaskRow.css'
-function TaskRow({widthProgress, imgUrl, imgAlt, lvl, taskName, time, price, weight1, trashName1, weight2, trashName2}) {
-    return(
+
+function TaskRow({
+  widthProgress, 
+  imgUrl, 
+  imgAlt, 
+  lvl, 
+  taskName, 
+  time, 
+  price, 
+  weight1, 
+  trashName1, 
+  weight2, 
+  trashName2,
+  onActivate
+}) {
+
+
+    const handleClick = () => {
+      if (typeof onActivate === 'function') onActivate()
+    }
+
+  return(
         <div className="main-row">
-          <div
+          
+          <div onClick={handleClick}
             className="left"
           >
             <img src={imgUrl} alt={imgAlt} />
           </div>
-          <div className="middle">
+          <div 
+            className="middle"
+            >
             <div className="text">
               <div>
                 {lvl} lvl - {taskName}
