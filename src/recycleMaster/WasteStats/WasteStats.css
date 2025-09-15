@@ -24,3 +24,8 @@
 .coin img {
     width: 34px;
 }
+.waste-warning.alert-add-waste {
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
