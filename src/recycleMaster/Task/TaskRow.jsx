@@ -1,6 +1,8 @@
 import './TaskRow.css'
+import { useSelector } from 'react-redux'
 
 function TaskRow({
+  name,
   widthProgress, 
   imgUrl, 
   imgAlt, 
@@ -12,7 +14,9 @@ function TaskRow({
   trashName1, 
   weight2, 
   trashName2,
-  onActivate
+  onActivate,
+  alert,
+  alertMessage
 }) {
 
 
@@ -46,6 +50,13 @@ function TaskRow({
                   className="progress" style={{ width: `${widthProgress}%` }}
                 ></div>
             </div>
+            <div
+            className="waste-warning"
+            style={{ display: (alert?.active && alert?.source === name) ? 'block' : 'none' }}
+              id={name}
+             >
+              {alertMessage} 
+          </div>
           </div>
           <div className="right" >
             <img src="/assets/upgrade-text.png" alt="Upgrade" />

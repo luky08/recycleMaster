@@ -3,10 +3,14 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   waste: 0,
   readyWaste: 0,
-  money: 5000,
+  money: 50,
   plastic: 0,
   glass: 0,
   paper: 0,
+  alert: {
+    active: true,
+    source: "",
+  },
 };
 
 const gameSlice = createSlice({
@@ -17,12 +21,21 @@ const gameSlice = createSlice({
       if (state.money >= 10) {
         state.money -= 10;
         state.waste += 8;
+      } else {
       }
     },
     transportWaste(state) {
       if (state.waste >= 8) {
         state.waste -= 8;
         state.readyWaste += 8;
+        state.alert = {
+          active: true,
+        };
+      } else {
+        state.alert = {
+          active: true,
+          source: "transport",
+        };
       }
     },
     sortingWaste(state, action) {
@@ -32,6 +45,14 @@ const gameSlice = createSlice({
         state.plastic += s1;
         state.glass += s2 - s1;
         state.paper += 8 - s2;
+        state.alert = {
+          active: true,
+        };
+      } else {
+        state.alert = {
+          active: true,
+          source: "sorting",
+        };
       }
     },
   },
