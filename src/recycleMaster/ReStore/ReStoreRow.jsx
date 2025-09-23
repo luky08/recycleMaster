@@ -1,7 +1,7 @@
 import './ReStoreRow.css';
 
 
-function ReStoreRow({imgUrl, imgAlt, name, quantity, price}){
+function ReStoreRow({ imgUrl, imgAlt, name, nameProduct, quantity, price}){
     return(
         <div className="main-row store">
           <div className="left">
@@ -9,7 +9,7 @@ function ReStoreRow({imgUrl, imgAlt, name, quantity, price}){
           </div>
           <div className="middle">
             <div className="text">
-              <div>{name}</div>
+              <div>{nameProduct}</div>
               <div>Quantity: {quantity} <span> Price: {price} kč</span></div>
             </div>
           </div>
