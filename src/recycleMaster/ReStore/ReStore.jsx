@@ -7,7 +7,7 @@ function ReStore(){
     const tshirt = useSelector((s) => s.game.tshirt)
     const bottle = useSelector((s) => s.game.bottle)
     const notebook = useSelector((s) => s.game.notebook)
-    const window = useSelector((s) => s.game.notebook)
+    const window = useSelector((s) => s.game.window)
 
     return(
         <>

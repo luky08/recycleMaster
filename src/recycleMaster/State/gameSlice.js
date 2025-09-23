@@ -58,7 +58,7 @@ const gameSlice = createSlice({
             state.window++;
             break;
           case notebookKey:
-            state.window++;
+            state.notebook++;
             break;
           default:
             break;
