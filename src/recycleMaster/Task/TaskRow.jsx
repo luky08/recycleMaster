@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import './TaskRow.css'
 import { useSelector } from 'react-redux'
 
@@ -15,14 +16,39 @@ function TaskRow({
   weight2, 
   trashName2,
   onActivate,
-  alert,
-  alertMessage
+  onFinish,
+  alert
 }) {
+  const [widthProgressState, setWidthProgress] = useState(0);
+  const handleClick = () => {
+    if (typeof onActivate === 'function') {
+      onActivate(
+        name,
+        trashName1,
+        weight1,
+        trashName2,
+        weight2
+      )
 
-
-    const handleClick = () => {
-      if (typeof onActivate === 'function') onActivate()
+      const interval = setInterval(() => {
+    widthProgress++;
+    if(widthProgress >= 100) {
+      clearInterval(interval)
+      onFinish(
+        name,
+        trashName1,
+        weight1,
+        trashName2,
+        weight2
+      )
     }
+    setWidthProgress(widthProgress)
+    }, 100)
+      }
+      
+    }
+
+  
 
   return(
         <div className="main-row">
@@ -47,15 +73,15 @@ function TaskRow({
             <div className="progress-bar">
               
                 <div
-                  className="progress" style={{ width: `${widthProgress}%` }}
+                  className="progress" style={{ width: `${widthProgressState}%` }}
                 ></div>
             </div>
             <div
             className="waste-warning"
-            style={{ display: (alert?.active && alert?.source === name) ? 'block' : 'none' }}
+            style={{ display: alert?.message && alert?.name?.includes(name) ? 'block' : 'none' }}
               id={name}
              >
-              {alertMessage} 
+              {alert?.message} 
           </div>
           </div>
           <div className="right" >
