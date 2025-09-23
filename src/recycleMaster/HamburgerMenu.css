@@ -80,3 +80,22 @@ a svg {
     from { transform: translateX(0);    opacity: 1; }
     to   { transform: translateX(110%); opacity: 0; }
 }
+
+.submenu {
+  padding: 10px 20px;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  font-size: 14px;
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+      width: 50%;
+    align-items: center;
+}
+.submenu ul {
+  list-style: disc;
+  padding-left: 20px;
+}
+.submenu li {
+  margin: 5px 0;
+}
