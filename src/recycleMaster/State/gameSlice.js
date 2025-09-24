@@ -21,10 +21,10 @@ const initialState = {
   },
   alertMessage: null,
 
-  tshirt: 0,
-  bottle: 0,
-  notebook: 0,
-  window: 0,
+  tshirt: 1,
+  bottle: 2,
+  notebook: 3,
+  window: 4,
 };
 
 const gameSlice = createSlice({
@@ -36,33 +36,6 @@ const gameSlice = createSlice({
         state.money -= 10;
         state.waste += 8;
       } else {
-      }
-    },
-    finishCrafting(state, action) {
-      const { name, trashName1, weight1, trashName2, weight2 } = action.payload;
-
-      if (!errorDuringOperation) {
-        increaseNumber();
-      }
-      errorDuringOperation = false;
-
-      function increaseNumber() {
-        switch (name) {
-          case tshirtKey:
-            state.tshirt++;
-            break;
-          case bottleKey:
-            state.bottle++;
-            break;
-          case windowKey:
-            state.window++;
-            break;
-          case notebookKey:
-            state.notebook++;
-            break;
-          default:
-            break;
-        }
       }
     },
     transportWaste(state) {
@@ -98,14 +71,20 @@ const gameSlice = createSlice({
       }
     },
     craft(state, action) {
-      const { name, trashName1, weight1, trashName2, weight2 } = action.payload;
+      const {
+        name,
+        trashNameFirst,
+        weightFirst,
+        trashNameSecond,
+        weightSecond,
+      } = action.payload;
 
       console.log("Crafting:", name);
-      console.log("Using:", trashName1, weight1);
-      console.log("And:", trashName2, weight2);
+      console.log("Using:", trashNameFirst, weightFirst);
+      console.log("And:", trashNameSecond, weightSecond);
 
-      chooseMaterial(trashName1, 1);
-      chooseMaterial(trashName2, 2);
+      chooseMaterial(trashNameFirst, 1);
+      chooseMaterial(trashNameSecond, 2);
 
       function chooseMaterial(trashName, trashNumber) {
         switch (trashName) {
@@ -127,16 +106,16 @@ const gameSlice = createSlice({
       function editStateMaterial(stateMaterial, weightNumber) {
         let weight = null;
         if (weightNumber == 1) {
-          weight = weight1;
+          weight = weightFirst;
         } else {
-          weight = weight2;
+          weight = weightSecond;
         }
 
         if (!errorDuringOperation && stateMaterial >= weight) {
           stateMaterial -= weight;
         } else {
           state.alert = {
-            message: "Nemáš " + trashName1,
+            message: "Nemáš " + trashNameFirst,
             name: name,
           };
           errorDuringOperation = true;
@@ -144,9 +123,54 @@ const gameSlice = createSlice({
         return stateMaterial;
       }
     },
+
+    finishCrafting(state, action) {
+      const {
+        name,
+        trashNameFirst,
+        weightFirst,
+        trashNameSecond,
+        weightSecond,
+      } = action.payload;
+
+      if (!errorDuringOperation) {
+        increaseNumber();
+      }
+      errorDuringOperation = false;
+
+      function increaseNumber() {
+        switch (name) {
+          case tshirtKey:
+            state.tshirt++;
+            break;
+          case bottleKey:
+            state.bottle++;
+            break;
+          case windowKey:
+            state.window++;
+            break;
+          case notebookKey:
+            state.notebook++;
+            break;
+          default:
+            break;
+        }
+      }
+    },
+    sellProduct(state, action) {
+      const price = action.payload;
+      state.tshirt--;
+      money + price;
+    },
   },
 });
 
-export const { buyWaste, transportWaste, sortingWaste, craft, finishCrafting } =
-  gameSlice.actions;
+export const {
+  buyWaste,
+  transportWaste,
+  sortingWaste,
+  craft,
+  finishCrafting,
+  sellProductS,
+} = gameSlice.actions;
 export default gameSlice.reducer;
