@@ -11,40 +11,41 @@ function TaskRow({
   taskName, 
   time, 
   price, 
-  weight1, 
-  trashName1, 
-  weight2, 
-  trashName2,
+  weightFirst, 
+  trashNameFirst, 
+  weightSecond, 
+  trashNameSecond,
   onActivate,
   onFinish,
   alert
 }) {
   const [widthProgressState, setWidthProgress] = useState(0);
   const handleClick = () => {
+
     if (typeof onActivate === 'function') {
       onActivate(
         name,
-        trashName1,
-        weight1,
-        trashName2,
-        weight2
+        trashNameFirst,
+        weightFirst,
+        trashNameSecond,
+        weightSecond
       )
-
+      console.log(weightFirst);
       const interval = setInterval(() => {
-    widthProgress++;
-    if(widthProgress >= 100) {
-      clearInterval(interval)
-      onFinish(
-        name,
-        trashName1,
-        weight1,
-        trashName2,
-        weight2
-      )
+        widthProgress++;
+        if(widthProgress >= 100) {
+          clearInterval(interval)
+          onFinish(
+            name,
+            trashNameFirst,
+            weightFirst,
+            trashNameSecond,
+            weightSecond
+          )
+        }
+        setWidthProgress(widthProgress)
+        }, 100)
     }
-    setWidthProgress(widthProgress)
-    }, 100)
-      }
       
     }
 
@@ -67,7 +68,7 @@ function TaskRow({
                 {lvl} lvl - {taskName}
               </div>
               <div>
-                {weight1} kg {trashName1 && `(${trashName1})`} {weight2 && `${weight2} kg (${trashName2})`}  <span> &nbsp;{time} min </span>
+                {weightFirst} kg {trashNameFirst && `(${trashNameFirst})`} {weightSecond && `${weightSecond} kg (${trashNameSecond})`}  <span> &nbsp;{time} min </span>
               </div>
             </div>
             <div className="progress-bar">
