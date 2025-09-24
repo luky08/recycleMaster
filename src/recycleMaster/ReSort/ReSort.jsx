@@ -15,6 +15,7 @@ function ReSort() {
     return(
         <>
         <div className="right-section">
+
             <TaskRow 
             name="transport"
             widthProgress={15} 
@@ -27,9 +28,10 @@ function ReSort() {
             price={25}
             onActivate={() => dispatch(transportWaste())}
             alert={alert}
-            alertMessage="Nemáš dostatek odpadu!"
             />
+
             <div className="ready-sorting">Waste ready for sorting: {readyWaste} </div>
+            
             <TaskRow 
             name="sorting"
             widthProgress={15} 
@@ -40,11 +42,11 @@ function ReSort() {
             weight1={8} 
             time={18} 
             price={25}
+            
             onActivate={() => {
             const range = getRandomNumberForSorting(8);
             dispatch(sortingWaste(range));
             }}
-            alertMessage="Nemáš dostatek připraveného odpadu!"
             alert={alert}
             />
             <div className="btn-add-waste">

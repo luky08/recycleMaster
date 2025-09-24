@@ -29,7 +29,6 @@ function ReCraft(){
                     alert={alert}
                     onActivate={(name, trashNameFirst, weightFirst, trashNameSecond, weightSecond) => dispatch(craft({name, trashNameFirst, weightFirst, trashNameSecond, weightSecond}))}
                     onFinish={(name, trashNameFirst, weightFirst, trashNameSecond, weightSecond) => dispatch(finishCrafting({name, trashNameFirst, weightFirst, trashNameSecond, weightSecond}))}
-
                 />
             ))}
         </>
