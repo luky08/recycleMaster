@@ -1,0 +1,123 @@
+[
+    {
+        "id": 1,
+        "name": "tshirt",
+        "taskName": "Make a T-shirt",
+        "imgName": "t-shirt.png",
+        "imgAlt": "Img T-shirt",
+        "trashNameFirst": "plastic",
+        "levels": [
+            {
+                "level": 1,
+                "time": 2,
+                "upPrice": 25,
+                "weightFirst": 5
+            },
+            {
+                "level": 2,
+                "time": 1.5,
+                "upPrice":  35,
+                "weightFirst": 4
+            },
+            {
+                "level": 3,
+                "time": 1,
+                "upPrice": 50,
+                "weightFirst": 3
+            }
+        ],
+        "price": 25
+    },
+    {
+        "id": 2,
+        "name": "bottle",
+        "taskName": "Make a Bottle",
+        "imgName": "bottle.png",
+        "imgAlt": "Img bottle",
+        "trashNameFirst": "glass",
+        "levels": [
+            {
+                "level": 1,
+                "time": 2,
+                "upPrice": 25,
+                "weightFirst": 5
+            },
+            {
+                "level": 2,
+                "time": 1.5,
+                "upPrice":  35,
+                "weightFirst": 4
+            },
+            {
+                "level": 3,
+                "time": 1,
+                "upPrice": 50,
+                "weightFirst": 3
+            }
+        ],
+        "price": 5
+    },
+    {
+        "id": 3,
+        "name": "notebook",
+        "taskName": "Make a notebook",
+        "imgName": "notebook.png",
+        "imgAlt": "Img notebook",
+        "trashNameFirst": "paper",
+        "levels": [
+            {
+                "level": 1,
+                "time": 2,
+                "upPrice": 25,
+                "weightFirst": 5
+            },
+            {
+                "level": 2,
+                "time": 1.5,
+                "upPrice":  35,
+                "weightFirst": 4
+            },
+            {
+                "level": 3,
+                "time": 1,
+                "upPrice": 50,
+                "weightFirst": 3
+            }
+        ],
+        "price": 7
+    },
+    {
+        "id": 4,
+        "name": "window",
+        "taskName": "Make a window",
+        "imgName": "window.png",
+        "imgAlt": "Img window",
+        "trashNameFirst": "glass",
+        "trashNameSecond": "plastic",
+        "levels": [
+            {
+                "level": 1,
+                "time": 2,
+                "upPrice": 25,
+                "weightFirst": 5,
+                "weightSecond": 5
+            },
+            {
+                "level": 2,
+                "time": 1.5,
+                "upPrice":  35,
+                "weightFirst": 4,
+                "weightSecond": 4
+            },
+            {
+                "level": 3,
+                "time": 1,
+                "upPrice": 50,
+                "weightFirst": 3,
+                "weightSecond": 3
+            }
+        ],
+        "price": 50
+    
+    }
+]
