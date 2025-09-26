@@ -5,11 +5,12 @@ const windowKey = "window";
 const bottleKey = "bottle";
 const notebookKey = "notebook";
 let errorDuringOperation = false;
+let errorDuringTransport = false;
 
 const initialState = {
   waste: 0,
-  readyWaste: 0,
-  money: 50,
+  readyWaste: 50,
+  money: 500,
   plastic: 50,
   glass: 50,
   paper: 0,
@@ -20,11 +21,14 @@ const initialState = {
     name: null,
   },
   alertMessage: null,
+  productLevels: {},
+  levelTransport: 0,
+  levelSort: 0,
 
-  tshirt: 1,
-  bottle: 2,
-  notebook: 3,
-  window: 4,
+  tshirt: 0,
+  bottle: 0,
+  notebook: 0,
+  window: 0,
 };
 
 const gameSlice = createSlice({
@@ -38,10 +42,11 @@ const gameSlice = createSlice({
       } else {
       }
     },
-    transportWaste(state) {
-      if (state.waste >= 8) {
-        state.waste -= 8;
-        state.readyWaste += 8;
+    transportWaste(state, action) {
+      const { name, weightFirst } = action.payload;
+
+      if (state.waste >= weightFirst) {
+        state.waste -= weightFirst;
         state.alert = {
           active: true,
         };
@@ -51,9 +56,35 @@ const gameSlice = createSlice({
           source: "transport",
         };
       }
+      console.log(errorDuringTransport);
+
+      if (!errorDuringTransport && state.waste >= weightFirst) {
+        state.waste - weightFirst;
+      } else {
+        state.alert = {
+          message: "Nemáš Odpad",
+          name: name,
+        };
+        errorDuringTransport = true;
+      }
+      console.log(errorDuringTransport);
     },
+    finishTransport(state, action) {
+      const { weightFirst } = action.payload;
+
+      if (!errorDuringTransport) {
+        console.log(state.readyWaste);
+        state.readyWaste += weightFirst;
+        console.log(state.readyWaste);
+        console.log(weightFirst);
+      }
+      errorDuringTransport = false;
+    },
+
     sortingWaste(state, action) {
       const [s1, s2] = action.payload ?? [];
+      const { weightSort } = action.payload;
+      console.log("tt" + weightSort);
       if (state.readyWaste >= 8) {
         state.readyWaste -= 8;
         state.plastic += s1;
@@ -125,13 +156,7 @@ const gameSlice = createSlice({
     },
 
     finishCrafting(state, action) {
-      const {
-        name,
-        trashNameFirst,
-        weightFirst,
-        trashNameSecond,
-        weightSecond,
-      } = action.payload;
+      const { name } = action.payload;
 
       if (!errorDuringOperation) {
         increaseNumber();
@@ -157,6 +182,40 @@ const gameSlice = createSlice({
         }
       }
     },
+    upgradeProduct(state, action) {
+      const { id, cost, nextLevelIndex } = action.payload;
+      if (state.money < cost) {
+        state.alert = { name: id, message: "Nedostatek peněz na upgrade." };
+        return;
+      }
+      // posuň level (komponenta už ohlídala MAX)
+      state.productLevels[id] = nextLevelIndex;
+      state.money -= cost;
+      state.alert = null;
+    },
+    upgradeTransport(state, action) {
+      const { cost, nextLevelIndex } = action.payload;
+      if (state.money < cost) {
+        state.alert = { message: "Nedostatek peněz na upgrade." };
+        return;
+      }
+      state.levelTransport = nextLevelIndex;
+      console.log(nextLevelIndex);
+      state.money -= cost;
+      state.alert = null;
+    },
+    upgradeSort(state, action) {
+      const { cost, nextLevelIndex } = action.payload;
+      if (state.money < cost) {
+        state.alert = { message: "Nedostatek peněz na upgrade." };
+        return;
+      }
+      state.levelSort = nextLevelIndex;
+      console.log(nextLevelIndex);
+      state.money -= cost;
+      state.alert = null;
+    },
+
     sellProduct(state, action) {
       const price = action.payload;
       state.tshirt--;
@@ -172,5 +231,9 @@ export const {
   craft,
   finishCrafting,
   sellProductS,
+  upgradeProduct,
+  upgradeTransport,
+  upgradeSort,
+  finishTransport,
 } = gameSlice.actions;
 export default gameSlice.reducer;

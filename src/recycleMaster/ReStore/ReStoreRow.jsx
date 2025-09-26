@@ -1,7 +1,11 @@
 import './ReStoreRow.css';
+import { useSelector } from 'react-redux';
+
+function ReStoreRow({ imgUrl, imgAlt, name, nameProduct, quantityName, price}){
+
+    const quantity = useSelector((s) => s.game[quantityName] ?? 0)
 
 
-function ReStoreRow({ imgUrl, imgAlt, name, nameProduct, quantity, price}){
     return(
         <div className="main-row store">
           <div className="left">
