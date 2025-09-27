@@ -8,6 +8,7 @@ let errorDuringOperation = false;
 let errorDuringTransport = false;
 
 const initialState = {
+  errorsStore: {},
   waste: 0,
   readyWaste: 50,
   money: 500,
@@ -25,8 +26,8 @@ const initialState = {
   levelTransport: 0,
   levelSort: 0,
 
-  tshirt: 0,
-  bottle: 0,
+  tshirt: 20,
+  bottle: 20,
   notebook: 0,
   window: 0,
 };
@@ -121,7 +122,6 @@ const gameSlice = createSlice({
         switch (trashName) {
           case "plastic":
             state.plastic = editStateMaterial(state.plastic, trashNumber);
-            localStorage.setItem("plastic", state.plastic);
             break;
           case "glass":
             state.glass = editStateMaterial(state.glass, trashNumber);
@@ -217,9 +217,40 @@ const gameSlice = createSlice({
     },
 
     sellProduct(state, action) {
-      const price = action.payload;
-      state.tshirt--;
-      money + price;
+      const { quantityName, price, operation } = action.payload;
+      //Input validation
+      if (!quantityName || typeof price !== "number") return;
+      const currentQty = state[quantityName];
+      if (typeof currentQty !== "number") {
+        state.errorsStore[quantityName] = `Unknown inventory: ${quantityName}`;
+        return;
+      }
+
+      if (currentQty <= 0) {
+        state.errorsStore[quantityName] = "You have nothing for sale.";
+        return;
+      }
+
+      const isOne = operation === "one";
+      const isAll = operation === "all";
+      if (!isOne && !isAll) {
+        state.errorsStore[quantityName] = `Unknown operation: ${operation}`;
+        return;
+      }
+
+      const unitsToSell = isOne ? 1 : currentQty;
+
+      // Inventory and cash update
+      state[quantityName] = currentQty - unitsToSell;
+      state.money += price * unitsToSell;
+    },
+    clearError(state, action) {
+      const { name } = action.payload || {};
+      if (name) {
+        delete state.errorsStore[name];
+      } else {
+        state.errorsStore = {};
+      }
     },
   },
 });
@@ -230,10 +261,11 @@ export const {
   sortingWaste,
   craft,
   finishCrafting,
-  sellProductS,
   upgradeProduct,
   upgradeTransport,
   upgradeSort,
   finishTransport,
+  sellProduct,
+  clearError,
 } = gameSlice.actions;
 export default gameSlice.reducer;
