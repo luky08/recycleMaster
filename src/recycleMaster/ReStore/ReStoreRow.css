@@ -42,3 +42,13 @@ button:active {
   background-color: #90AF3C;
   transform: scale(0.98);
 }
+.error {
+    color: #fff;
+    background-color: #ff0b04;
+    padding: 4px 2rem;
+    border-radius: 5px;
+    margin-top: 1px;
+    position: fixed;
+    font-size: 12px;
+    font-weight: 600;
+}
