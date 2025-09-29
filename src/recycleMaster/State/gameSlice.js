@@ -1,22 +1,34 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { getRandomNumberForSorting } from "./randomNumberForSorting";
 
 const tshirtKey = "tshirt";
 const windowKey = "window";
 const bottleKey = "bottle";
 const notebookKey = "notebook";
-let errorDuringOperation = false;
-let errorDuringTransport = false;
 
 const initialState = {
-  errorsStore: {},
+  errorsStore: {}, //přejmenovat na něco lepšího
+  errorsProcess: {},
   waste: 0,
   readyWaste: 50,
   money: 500,
   plastic: 50,
   glass: 50,
   paper: 0,
+
+  tshirt: 20,
+  bottle: 20,
+  notebook: 0,
+  window: 0,
+
+  levels: {},
+
+  errorDuringTransport: false,
+  errorDuringSorting: false,
+  errorDuringOperation: false,
+
   alert: {
-    active: true,
+    active: false,
     source: "",
     message: null,
     name: null,
@@ -25,11 +37,6 @@ const initialState = {
   productLevels: {},
   levelTransport: 0,
   levelSort: 0,
-
-  tshirt: 20,
-  bottle: 20,
-  notebook: 0,
-  window: 0,
 };
 
 const gameSlice = createSlice({
@@ -43,63 +50,57 @@ const gameSlice = createSlice({
       } else {
       }
     },
-    transportWaste(state, action) {
-      const { name, weightFirst } = action.payload;
+    transport(state, action) {
+      const { weight } = action.payload;
+      if (weight <= 0) return;
 
-      if (state.waste >= weightFirst) {
-        state.waste -= weightFirst;
-        state.alert = {
-          active: true,
-        };
+      const canTransport = state.waste >= weight;
+
+      if (canTransport) {
+        state.waste -= weight;
+        state.errorDuringTransport = false;
       } else {
+        /*
         state.alert = {
           active: true,
           source: "transport",
-        };
+        };*/
+        state.errorDuringTransport = true;
       }
-      console.log(errorDuringTransport);
-
-      if (!errorDuringTransport && state.waste >= weightFirst) {
-        state.waste - weightFirst;
-      } else {
-        state.alert = {
-          message: "Nemáš Odpad",
-          name: name,
-        };
-        errorDuringTransport = true;
-      }
-      console.log(errorDuringTransport);
     },
     finishTransport(state, action) {
-      const { weightFirst } = action.payload;
+      const { weight } = action.payload;
 
-      if (!errorDuringTransport) {
-        console.log(state.readyWaste);
-        state.readyWaste += weightFirst;
-        console.log(state.readyWaste);
-        console.log(weightFirst);
+      if (!state.errorDuringTransport) {
+        state.readyWaste += weight;
       }
-      errorDuringTransport = false;
+      state.errorDuringTransport = false;
     },
 
-    sortingWaste(state, action) {
-      const [s1, s2] = action.payload ?? [];
-      const { weightSort } = action.payload;
-      console.log("tt" + weightSort);
-      if (state.readyWaste >= 8) {
-        state.readyWaste -= 8;
-        state.plastic += s1;
-        state.glass += s2 - s1;
-        state.paper += 8 - s2;
-        state.alert = {
-          active: true,
-        };
-        state.alertMessage;
+    sorting(state, action) {
+      const { weight } = action.payload;
+      if (state.readyWaste >= weight) {
+        state.readyWaste -= weight;
+        state.errorDuringSorting = false;
       } else {
-        state.alert = {
+        /*state.alert = {
           active: true,
           source: "sorting",
-        };
+        };*/
+        state.errorDuringSorting = false;
+      }
+    },
+    finishSorting(state, action) {
+      const { weight } = action.payload;
+      const numbers = getRandomNumberForSorting(weight);
+      if (!state.errorDuringSorting) {
+        updateWasteState();
+      }
+
+      function updateWasteState() {
+        state.plastic += numbers.lowNumber;
+        state.glass += numbers.highNumber - numbers.lowNumber;
+        state.paper += weight - numbers.highNumber;
       }
     },
     craft(state, action) {
@@ -142,14 +143,15 @@ const gameSlice = createSlice({
           weight = weightSecond;
         }
 
-        if (!errorDuringOperation && stateMaterial >= weight) {
+        if (!state.errorDuringOperation && stateMaterial >= weight) {
           stateMaterial -= weight;
         } else {
           state.alert = {
-            message: "Nemáš " + trashNameFirst,
+            active: true,
+            message: "You dont have " + trashNameFirst + trashNameSecond,
             name: name,
           };
-          errorDuringOperation = true;
+          state.errorDuringOperation = true;
         }
         return stateMaterial;
       }
@@ -158,10 +160,10 @@ const gameSlice = createSlice({
     finishCrafting(state, action) {
       const { name } = action.payload;
 
-      if (!errorDuringOperation) {
+      if (!state.errorDuringOperation) {
         increaseNumber();
       }
-      errorDuringOperation = false;
+      state.errorDuringOperation = false;
 
       function increaseNumber() {
         switch (name) {
@@ -182,44 +184,16 @@ const gameSlice = createSlice({
         }
       }
     },
-    upgradeProduct(state, action) {
+
+    upgrade(state, action) {
       const { id, cost, nextLevelIndex } = action.payload;
-      if (state.money < cost) {
-        state.alert = { name: id, message: "Nedostatek peněz na upgrade." };
-        return;
-      }
-      // posuň level (komponenta už ohlídala MAX)
-      state.productLevels[id] = nextLevelIndex;
+      state.levels[id] = nextLevelIndex;
       state.money -= cost;
-      state.alert = null;
-    },
-    upgradeTransport(state, action) {
-      const { cost, nextLevelIndex } = action.payload;
-      if (state.money < cost) {
-        state.alert = { message: "Nedostatek peněz na upgrade." };
-        return;
-      }
-      state.levelTransport = nextLevelIndex;
-      console.log(nextLevelIndex);
-      state.money -= cost;
-      state.alert = null;
-    },
-    upgradeSort(state, action) {
-      const { cost, nextLevelIndex } = action.payload;
-      if (state.money < cost) {
-        state.alert = { message: "Nedostatek peněz na upgrade." };
-        return;
-      }
-      state.levelSort = nextLevelIndex;
-      console.log(nextLevelIndex);
-      state.money -= cost;
-      state.alert = null;
     },
 
     sellProduct(state, action) {
       const { quantityName, price, operation } = action.payload;
       //Input validation
-      if (!quantityName || typeof price !== "number") return;
       const currentQty = state[quantityName];
       if (typeof currentQty !== "number") {
         state.errorsStore[quantityName] = `Unknown inventory: ${quantityName}`;
@@ -245,27 +219,39 @@ const gameSlice = createSlice({
       state.money += price * unitsToSell;
     },
     clearError(state, action) {
-      const { name } = action.payload || {};
+      const { name, type } = action.payload || {};
+      const e = "errors" + type;
       if (name) {
-        delete state.errorsStore[name];
+        delete state.errors + type[name];
+        console.log(state.e[name]);
+        console.log(type);
       } else {
         state.errorsStore = {};
       }
+    },
+    cleanAlert(state) {
+      state.alert = {
+        active: false,
+        message: null,
+        name: null,
+      };
     },
   },
 });
 
 export const {
   buyWaste,
-  transportWaste,
-  sortingWaste,
+  transport,
+  sorting,
+  finishSorting,
   craft,
   finishCrafting,
-  upgradeProduct,
+  upgrade,
   upgradeTransport,
   upgradeSort,
   finishTransport,
   sellProduct,
   clearError,
+  cleanAlert,
 } = gameSlice.actions;
 export default gameSlice.reducer;
