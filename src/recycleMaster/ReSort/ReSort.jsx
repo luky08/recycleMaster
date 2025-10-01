@@ -6,38 +6,23 @@ import data from '../../data.json';
 
 
 function ReSort() {
-    
     const readyWaste = useSelector((s) => s.game.readyWaste)
-    const tr = data.transport
-    
-    const sr = data.sorting
-
-
-    //const range = getRandomNumberForSorting(levelDataS.weight);
-
-    
     return(
         <>
         <div className="right-section">
             <TaskRow 
-                operationData={tr}
-                type="transport"            
-                alert={alert}
+                operationData={data.transport}
+                type="transport"      
             />
-
-
             <div className="ready-sorting">Waste ready for sorting: {readyWaste} </div>
             <TaskRow 
-
-                operationData={sr}
+                operationData={data.sorting}
                 type="sorting"
-                alert={alert}
             />
             <div className="btn-add-waste">
                 <BtnAddWaste/>
             </div>
         </div>
-
         </>
     )
 }
