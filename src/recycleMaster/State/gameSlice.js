@@ -8,20 +8,20 @@ const notebookKey = "notebook";
 
 const initialState = {
   errorsStore: {}, //přejmenovat na něco lepšího
-  errorsProcess: {},
   waste: 0,
-  readyWaste: 50,
-  money: 500,
+  readyWaste: 0,
+  money: 50,
   plastic: 50,
-  glass: 50,
+  glass: 0,
   paper: 0,
 
-  tshirt: 20,
-  bottle: 20,
+  tshirt: 0,
+  bottle: 0,
   notebook: 0,
   window: 0,
 
   levels: {},
+  endGameProgress: 0,
 
   errorDuringTransport: false,
   errorDuringSorting: false,
@@ -33,10 +33,6 @@ const initialState = {
     message: null,
     name: null,
   },
-  alertMessage: null,
-  productLevels: {},
-  levelTransport: 0,
-  levelSort: 0,
 };
 
 const gameSlice = createSlice({
@@ -60,11 +56,6 @@ const gameSlice = createSlice({
         state.waste -= weight;
         state.errorDuringTransport = false;
       } else {
-        /*
-        state.alert = {
-          active: true,
-          source: "transport",
-        };*/
         state.errorDuringTransport = true;
       }
     },
@@ -76,17 +67,12 @@ const gameSlice = createSlice({
       }
       state.errorDuringTransport = false;
     },
-
     sorting(state, action) {
       const { weight } = action.payload;
       if (state.readyWaste >= weight) {
         state.readyWaste -= weight;
         state.errorDuringSorting = false;
       } else {
-        /*state.alert = {
-          active: true,
-          source: "sorting",
-        };*/
         state.errorDuringSorting = false;
       }
     },
@@ -158,10 +144,11 @@ const gameSlice = createSlice({
     },
 
     finishCrafting(state, action) {
-      const { name } = action.payload;
+      const { name, rePoint } = action.payload;
 
       if (!state.errorDuringOperation) {
         increaseNumber();
+        state.endGameProgress += rePoint;
       }
       state.errorDuringOperation = false;
 
@@ -192,32 +179,33 @@ const gameSlice = createSlice({
     },
 
     sellProduct(state, action) {
-      const { quantityName, price, operation } = action.payload;
+      const { name, price, actionSell } = action.payload;
       //Input validation
-      const currentQty = state[quantityName];
+      const currentQty = state[name];
       if (typeof currentQty !== "number") {
-        state.errorsStore[quantityName] = `Unknown inventory: ${quantityName}`;
+        state.errorsStore[name] = `Unknown inventory: ${name}`;
         return;
       }
 
       if (currentQty <= 0) {
-        state.errorsStore[quantityName] = "You have nothing for sale.";
+        state.errorsStore[name] = "You have nothing for sale.";
         return;
       }
 
-      const isOne = operation === "one";
-      const isAll = operation === "all";
+      const isOne = actionSell === "one";
+      const isAll = actionSell === "all";
       if (!isOne && !isAll) {
-        state.errorsStore[quantityName] = `Unknown operation: ${operation}`;
+        state.errorsStore[name] = `Unknown action: ${actionSell}`;
         return;
       }
 
       const unitsToSell = isOne ? 1 : currentQty;
 
       // Inventory and cash update
-      state[quantityName] = currentQty - unitsToSell;
+      state[name] = currentQty - unitsToSell;
       state.money += price * unitsToSell;
     },
+
     clearError(state, action) {
       const { name, type } = action.payload || {};
       const e = "errors" + type;
@@ -229,12 +217,28 @@ const gameSlice = createSlice({
         state.errorsStore = {};
       }
     },
+
+    setAlert(state, action) {
+      const { message, name } = action.payload || {};
+      state.alert = {
+        active: true,
+        message: message ?? null,
+        name: name ?? null,
+      };
+    },
+
     cleanAlert(state) {
       state.alert = {
         active: false,
         message: null,
         name: null,
       };
+    },
+    startBlocking(state) {
+      state.navBlockers += 1;
+    },
+    stopBlocking(state) {
+      state.navBlockers = Math.max(0, state.navBlockers - 1);
     },
   },
 });
@@ -247,11 +251,49 @@ export const {
   craft,
   finishCrafting,
   upgrade,
-  upgradeTransport,
-  upgradeSort,
   finishTransport,
   sellProduct,
   clearError,
   cleanAlert,
+  setAlert,
+  startBlocking,
+  stopBlocking,
 } = gameSlice.actions;
+
 export default gameSlice.reducer;
+
+/**
+ * Selector used by the UI to decide if crafting can start (so progress runs only when materials suffice).
+ * Mirrors the reducer's "chooseMaterial + editStateMaterial" behavior,
+ * supports 1 or 2 inputs, and sums when both inputs are the same material.
+ */
+export const selectCanCraft = (state, payload) => {
+  const {
+    trashNameFirst,
+    weightFirst = 0,
+    trashNameSecond,
+    weightSecond = 0,
+  } = payload || {};
+
+  const { plastic = 0, glass = 0, paper = 0 } = state.game;
+  const required = { plastic: 0, glass: 0, paper: 0 };
+
+  const addReq = (name, w) => {
+    if (!name) return;
+    const need = Number(w) || 0;
+    if (need <= 0) return;
+    if (name === "plastic" || name === "glass" || name === "paper") {
+      required[name] += need;
+    }
+  };
+
+  addReq(trashNameFirst, weightFirst);
+  addReq(trashNameSecond, weightSecond);
+
+  // Compare available vs required
+  if (plastic < required.plastic) return false;
+  if (glass < required.glass) return false;
+  if (paper < required.paper) return false;
+
+  return true;
+};
