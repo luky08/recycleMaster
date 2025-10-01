@@ -14,12 +14,12 @@ function BtnAddWaste() {
           if (canBuy) dispatch(buyWaste());
         }}
       >
-        Přidat odpad (+8) za 10 reCoin
+        Add waste (+8) for 10 reCoins
       </button>
 
       {!canBuy && (
         <div className="waste-warning alert-add-waste">
-          Nemáš dostatek peněz
+          You don't have enough reCoins
         </div>
       )}
     </div>

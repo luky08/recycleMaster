@@ -41,7 +41,7 @@ function ReStoreRow({
           <div className="middle">
             <div className="text">
               <div>{p.nameProduct}</div>
-              <div>Quantity: {quantity} <span> Price: {p.price} kč</span></div>
+              <div>Quantity: {quantity} <span> Price: {p.price} rc</span></div>
             </div>
             
           {/*error && <div className="error" >{error}</div>*/}

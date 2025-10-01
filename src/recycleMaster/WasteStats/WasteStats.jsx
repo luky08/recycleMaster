@@ -30,7 +30,7 @@ function WasteStats() {
             </div>
             <div className="coin">
                 <img src="/assets/reCoin.png" alt="reCoin"/>
-                <span>{money} re</span>
+                <span>{money} rc</span>
             </div>
             <div className="ham-menu">
                 <HamburgerMenu/>
