@@ -1,0 +1,6 @@
+.finish-progress-text{
+    margin: 2px 20px;
+}
+.finish-progress-text span {
+        color: var(--accent);
+}
