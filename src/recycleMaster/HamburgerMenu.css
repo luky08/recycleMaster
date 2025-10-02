@@ -99,3 +99,15 @@ a svg {
 .submenu li {
   margin: 5px 0;
 }
+
+@media screen and (min-width: 1367px) {
+    .menu {
+        max-width: 25%;
+        top: 0;
+        right: 0;
+        left: auto
+    }
+    .submenu {
+        width: 100%;
+    }
+}
