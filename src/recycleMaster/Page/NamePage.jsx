@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { setUser } from '../State/userSlice';
 import './NamePage.css';
+import HowToPlayInfo from '../Components/HowToPlayInfo';
 
 export default function NamePage() {
   const dispatch = useDispatch();
@@ -61,9 +62,9 @@ export default function NamePage() {
               id="playerName"
               className="form__input"
               type="text"
-              placeholder="Zadej své jméno"
+              placeholder="Enter your name"
               value={name}
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e) => setName(e.target.value.replace(/\s/g, ''))}
               maxLength={40}
               required
             />
@@ -76,14 +77,14 @@ export default function NamePage() {
 
           <div className="form__row">
             <label htmlFor="playerAge" className="form__label">
-              Věk
+              Age
             </label>
             <input
               id="playerAge"
               className="form__input"
               type="number"
               inputMode="numeric"
-              placeholder="např. 12"
+              placeholder="Enter your age"
               value={age}
               onChange={(e) => setAge(e.target.value)}
               min={1}
@@ -95,28 +96,11 @@ export default function NamePage() {
             )}
           </div>
 
-        <details className="welcome__howto" open>
-            <summary>How to play the game</summary>
-            <ul>
-                <li>
-                    In the <strong>ReSort</strong> section, purchase mixed waste, transport it to the sorting facility, and separate it into paper, glass, and plastic.
-                </li>
-                <li>
-                    In <strong>ReCraft</strong>, use the sorted materials to craft products.
-                </li>
-                <li>
-                    You earn <strong>reXP</strong> for the crafted goods, which helps you become the Recycle Master.
-                </li>
-                <li>
-                    In <strong>ReStore</strong>, store and manage your resources.
-                </li>
-                <li>
-                    Sell your products to earn <strong>reCoin</strong>, which you can use to unlock upgrades.
-                </li>
-            </ul>
+          <details className="welcome__howto" open>
+            <HowToPlayInfo />
           </details>
 
-          <button className="welcome__cta" type="submit" >
+          <button className="welcome__cta" type="submit">
             All set, let’s begin!
           </button>
         </form>
