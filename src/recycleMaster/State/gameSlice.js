@@ -7,7 +7,8 @@ const bottleKey = "bottle";
 const notebookKey = "notebook";
 
 const initialState = {
-  errorsStore: {}, //přejmenovat na něco lepšího
+  alertsStore: {},
+
   waste: 0,
   readyWaste: 0,
   money: 50,
@@ -183,19 +184,19 @@ const gameSlice = createSlice({
       //Input validation
       const currentQty = state[name];
       if (typeof currentQty !== "number") {
-        state.errorsStore[name] = `Unknown inventory: ${name}`;
+        state.alertsStore[name] = `Unknown inventory: ${name}`;
         return;
       }
 
       if (currentQty <= 0) {
-        state.errorsStore[name] = "You have nothing for sale.";
+        state.alertsStore[name] = "You have nothing for sale.";
         return;
       }
 
       const isOne = actionSell === "one";
       const isAll = actionSell === "all";
       if (!isOne && !isAll) {
-        state.errorsStore[name] = `Unknown action: ${actionSell}`;
+        state.alertsStore[name] = `Unknown action: ${actionSell}`;
         return;
       }
 
@@ -206,7 +207,7 @@ const gameSlice = createSlice({
       state.money += price * unitsToSell;
     },
 
-    clearError(state, action) {
+    clearAlertReStore(state, action) {
       const { name, type } = action.payload || {};
       const e = "errors" + type;
       if (name) {
@@ -214,7 +215,7 @@ const gameSlice = createSlice({
         console.log(state.e[name]);
         console.log(type);
       } else {
-        state.errorsStore = {};
+        state.alertsStore = {};
       }
     },
 
@@ -253,7 +254,7 @@ export const {
   upgrade,
   finishTransport,
   sellProduct,
-  clearError,
+  clearAlertReStore,
   cleanAlert,
   setAlert,
   startBlocking,

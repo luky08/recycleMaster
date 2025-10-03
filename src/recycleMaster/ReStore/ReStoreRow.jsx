@@ -1,7 +1,7 @@
 import './ReStoreRow.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import {sellProduct, clearError} from '../State/gameSlice'
+import {sellProduct, clearAlertReStore} from '../State/gameSlice'
 
 function ReStoreRow({ 
   productData,
@@ -9,8 +9,9 @@ function ReStoreRow({
   const dispatch = useDispatch()
 
     const p = productData;
-    const quantity = useSelector((s) => s.game[p.name])
-    
+    const quantity = useSelector((s) => s.game[p.name]);
+    const alert = useSelector((s) => s.game.alertsStore?.[p.name] ?? null);
+
 
     
 
@@ -23,15 +24,14 @@ function ReStoreRow({
         }
         dispatch(sellProduct(sellPayload))
     }
-/*
+
     useEffect(() => {
-      if (!error) return;
+      if (!alert) return;
       const t = setTimeout(() => {
-        onClearError?.(); 
-      }, 800);
+        dispatch(clearAlertReStore()) 
+      }, 1100);
       return () => clearTimeout(t);
-    }, [error, onClearError]);
-*/
+    }, [alert]);
 
     return(
         <div className="main-row store">
@@ -44,7 +44,7 @@ function ReStoreRow({
               <div>Quantity: {quantity} <span> Price: {p.price} rc</span></div>
             </div>
             
-          {/*error && <div className="error" >{error}</div>*/}
+          {alert && <div className="alert-store">{alert}</div>}
           </div>
           <div className="right">
             <button className="sell-one" onClick={handleSell} data-action="one">Sell 1x</button>
