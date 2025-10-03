@@ -4,4 +4,12 @@ function InfoSvg(){
     )
 }
 
-export {InfoSvg}
+function AchievementSvg({}){
+    return(
+        <svg width="20" height="20" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor"> <g strokeWidth="6" strokeLinecap="round" strokeLinejoin="round"> <path d="M38 22h52c0 24-10 40-26 43v12h-0.1V65C48 62 38 46 38 22Z"/> <path d="M38 30H27c-6 0-11 5-11 11v2c0 10 9 18 20 18"/> <path d="M90 30h11c6 0 11 5 11 11v2c0 10-9 18-20 18"/><path d="M64 77v12"/> <path d="M40 98h48"/> <path d="M30 110h68"/> </g> </svg>
+    )
+}
+export {
+    InfoSvg,
+    AchievementSvg
+}

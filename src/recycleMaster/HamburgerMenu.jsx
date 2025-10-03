@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import Hamburger from "hamburger-react";
 import './HamburgerMenu.css';
 import HowToPlayInfo from "./Components/HowToPlayInfo";
-import { InfoSvg } from "./Icon/IconsSvg";
+import { InfoSvg, AchievementSvg } from "./Icon/IconsSvg";
 import User from "./Components/User";
 
 
@@ -10,6 +11,9 @@ function HamburgerComponent(){
     const [open, setOpen] = useState(false)
     const [visible, setVisible] = useState(false);
     const [activeSection, setActiveSection] = useState(null);
+    const endGameProgress = useSelector((s) => s.game.endGameProgress)
+    const win = endGameProgress >= 100;
+    const styleWin = !win ? { filter: 'grayscale(100%)' } : {};
     
     useEffect(() => {
         if (open) setVisible(true);
@@ -36,8 +40,19 @@ function HamburgerComponent(){
         aria-hidden={!open}
             >
             <User/>
+            <a className="link" onClick={() => toggleSection("achievement")}>
+                <AchievementSvg/>
+                Achievement
+            </a>
+
+            {activeSection === "achievement" && (
+                <div className="submenu achievement">
+                    <img style={styleWin} src="/assets/winAchievement.png"/>
+                </div>
+            )}
+
             <a className="link" onClick={() => toggleSection("help")}>
-                <InfoSvg/>
+                <InfoSvg />
                 Help
             </a>
 
