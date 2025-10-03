@@ -42,13 +42,12 @@ button:active {
   background-color: #90AF3C;
   transform: scale(0.98);
 }
-.error {
+.alert-store {
     color: #fff;
-    background-color: #ff0b04;
+    background-color: #d9534f;
     padding: 4px 2rem;
     border-radius: 5px;
     margin-top: 1px;
     position: fixed;
     font-size: 12px;
-    font-weight: 600;
 }
