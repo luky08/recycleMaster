@@ -182,7 +182,6 @@ function TaskRow({
             className="progress" style={{ width: `${progress}%` }}
           ></div>
         </div>
-        {/* alert udělám přes způsob jak je udělaný ve store */}
         <div
           className="waste-warning"
           style={{ display: alert.message && alert.name.includes(data.name) ? 'block' : 'none' }}

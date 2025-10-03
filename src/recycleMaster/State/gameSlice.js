@@ -181,7 +181,6 @@ const gameSlice = createSlice({
 
     sellProduct(state, action) {
       const { name, price, actionSell } = action.payload;
-      //Input validation
       const currentQty = state[name];
       if (typeof currentQty !== "number") {
         state.alertsStore[name] = `Unknown inventory: ${name}`;
@@ -202,7 +201,6 @@ const gameSlice = createSlice({
 
       const unitsToSell = isOne ? 1 : currentQty;
 
-      // Inventory and cash update
       state[name] = currentQty - unitsToSell;
       state.money += price * unitsToSell;
     },
@@ -263,11 +261,6 @@ export const {
 
 export default gameSlice.reducer;
 
-/**
- * Selector used by the UI to decide if crafting can start (so progress runs only when materials suffice).
- * Mirrors the reducer's "chooseMaterial + editStateMaterial" behavior,
- * supports 1 or 2 inputs, and sums when both inputs are the same material.
- */
 export const selectCanCraft = (state, payload) => {
   const {
     trashNameFirst,
@@ -291,7 +284,6 @@ export const selectCanCraft = (state, payload) => {
   addReq(trashNameFirst, weightFirst);
   addReq(trashNameSecond, weightSecond);
 
-  // Compare available vs required
   if (plastic < required.plastic) return false;
   if (glass < required.glass) return false;
   if (paper < required.paper) return false;

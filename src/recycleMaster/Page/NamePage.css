@@ -142,7 +142,6 @@ body{
   border-bottom-color:var(--text);
 }
 
-/* Responsivita */
 @media (max-width: 520px){
   .welcome{ padding-top:28px }
   .welcome__panel{ padding:16px }

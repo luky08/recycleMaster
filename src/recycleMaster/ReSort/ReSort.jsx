@@ -4,7 +4,6 @@ import TaskRow from '../Task/TaskRow'
 import BtnAddWaste from '../WasteStats/BtnAddWaste'
 import data from '../../data.json'; 
 
-
 function ReSort() {
     const readyWaste = useSelector((s) => s.game.readyWaste)
     return(

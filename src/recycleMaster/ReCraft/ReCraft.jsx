@@ -3,7 +3,6 @@ import data from '../../data.json';
 
 function ReCraft(){
     
-    
     return(
         <>
             {data.products.map((p) => {

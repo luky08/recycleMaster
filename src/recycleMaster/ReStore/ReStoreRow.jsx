@@ -12,9 +12,6 @@ function ReStoreRow({
     const quantity = useSelector((s) => s.game[p.name]);
     const alert = useSelector((s) => s.game.alertsStore?.[p.name] ?? null);
 
-
-    
-
     const handleSell = (e) => {
         const actionSell = e.currentTarget.dataset.action;
         const sellPayload = {
@@ -43,8 +40,7 @@ function ReStoreRow({
               <div>{p.nameProduct}</div>
               <div>Quantity: {quantity} <span> Price: {p.price} rc</span></div>
             </div>
-            
-          {alert && <div className="alert-store">{alert}</div>}
+            {alert && <div className="alert-store">{alert}</div>}
           </div>
           <div className="right">
             <button className="sell-one" onClick={handleSell} data-action="one">Sell 1x</button>
