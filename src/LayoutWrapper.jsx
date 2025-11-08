@@ -5,7 +5,7 @@ import Tabs from './recycleMaster/Tabs/Tabs';
 import ReCraft from './recycleMaster/ReCraft/ReCraft';
 import ReStore from './recycleMaster/ReStore/ReStore';
 import WasteStats from './recycleMaster/WasteStats/WasteStats';
-import NamePage from './recycleMaster/Page/NamePage';
+import WelcomePage from './recycleMaster/WelcomePage/WelcomePage';
 import RecycleMasterProgress from './recycleMaster/RecycleMasterProgress';
 
 
@@ -26,7 +26,7 @@ function LayoutWrapper(){
 
 
       <Routes>
-        <Route path="/" element={<NamePage />} />
+        <Route path="/" element={<WelcomePage />} />
         <Route path="/resort" element={<ReSort />} />
         <Route path="/recraft" element={<ReCraft />} />
         <Route path="/restore" element={<ReStore />} />
