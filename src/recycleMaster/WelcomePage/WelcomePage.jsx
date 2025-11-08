@@ -2,7 +2,7 @@ import { useState, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { setUser } from '../State/userSlice';
-import './NamePage.css';
+import './WelcomePage.css';
 import HowToPlayInfo from '../Components/HowToPlayInfo';
 
 export default function NamePage() {
