@@ -24,5 +24,4 @@ Vite
 4. Start the development server:
   - npm run dev
 
-After that, you can just run:
-  - npm run
+
