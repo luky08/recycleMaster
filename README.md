@@ -1,5 +1,5 @@
 # Bachelor's thesis
-#Recycling Master
+# Recycling Master
 
 Recycling Master is a web-based idle game focused on waste sorting, recycling, and resource management.
 The player’s goal is to collect mixed waste, sort it into recyclable materials, and craft new products from them to earn in-game currency (reCoins) and experience points (XP).
@@ -7,7 +7,7 @@ The player’s goal is to collect mixed waste, sort it into recyclable materials
 The game is built using React, with state management handled by Redux.
 The interface follows a mobile-first design approach, ensuring full responsiveness and a smooth user experience on all devices.
 
-#Tech stack
+# Tech stack
 
 React
 Redux
