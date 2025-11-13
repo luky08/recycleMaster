@@ -10,21 +10,21 @@
             "levels": [
                 {
                     "level": 1,
-                    "time": 0.1,
+                    "time": 0.4,
                     "upPrice": 25,
-                    "weightFirst": 5
+                    "weightFirst": 7
                 },
                 {
                     "level": 2,
-                    "time": 1.5,
+                    "time": 0.2,
                     "upPrice":  35,
-                    "weightFirst": 4
+                    "weightFirst": 5
                 },
                 {
                     "level": 3,
-                    "time": 1,
+                    "time": 0.1,
                     "upPrice": 50,
-                    "weightFirst": 3
+                    "weightFirst": 4
                 }
             ],
             "price": 25,
@@ -40,24 +40,24 @@
             "levels": [
                 {
                     "level": 1,
-                    "time": 0.1,
+                    "time": 0.4,
                     "upPrice": 25,
-                    "weightFirst": 5
+                    "weightFirst": 6
                 },
                 {
                     "level": 2,
-                    "time": 1.5,
+                    "time": 0.2,
                     "upPrice":  35,
                     "weightFirst": 4
                 },
                 {
                     "level": 3,
-                    "time": 1,
+                    "time": 0.1,
                     "upPrice": 50,
                     "weightFirst": 3
                 }
             ],
-            "price": 5,
+            "price": 12,
             "rePoint": 1
         },
         {
@@ -70,24 +70,24 @@
             "levels": [
                 {
                     "level": 1,
-                    "time": 2,
+                    "time": 0.5,
                     "upPrice": 25,
-                    "weightFirst": 5
+                    "weightFirst": 7
                 },
                 {
                     "level": 2,
-                    "time": 1.5,
+                    "time": 0.4,
                     "upPrice":  35,
-                    "weightFirst": 4
+                    "weightFirst": 5
                 },
                 {
                     "level": 3,
-                    "time": 1,
+                    "time": 0.3,
                     "upPrice": 50,
                     "weightFirst": 3
                 }
             ],
-            "price": 7,
+            "price": 10,
             "rePoint": 1
         },
         {
@@ -101,27 +101,27 @@
             "levels": [
                 {
                     "level": 1,
-                    "time": 2,
+                    "time": 1,
                     "upPrice": 25,
-                    "weightFirst": 5,
-                    "weightSecond": 5
+                    "weightFirst": 18,
+                    "weightSecond": 18
                 },
                 {
                     "level": 2,
-                    "time": 1.5,
+                    "time": 0.9,
                     "upPrice":  35,
-                    "weightFirst": 4,
-                    "weightSecond": 4
+                    "weightFirst": 16,
+                    "weightSecond": 14
                 },
                 {
                     "level": 3,
-                    "time": 1,
+                    "time": 0.8,
                     "upPrice": 50,
-                    "weightFirst": 3,
-                    "weightSecond": 3
+                    "weightFirst": 13,
+                    "weightSecond": 11
                 }
             ],
-            "price": 50,
+            "price": 120,
             "rePoint": 2
         
         }
@@ -135,19 +135,19 @@
             "levels": [
                 {
                     "level": 1,
-                    "time": 0.05,
+                    "time": 0.4,
                     "upPrice": 25,
                     "weight": 4 
                 },
                 {
                     "level": 2,
-                    "time": 1.5,
+                    "time": 0.2,
                     "upPrice":  35,
                     "weight": 5
                 },
                 {
                     "level": 3,
-                    "time": 1,
+                    "time": 0.1,
                     "upPrice": 50,
                     "weight": 7
                 }
@@ -162,19 +162,19 @@
         "levels": [
             {
                 "level": 1,
-                "time": 0.1,
+                "time": 0.4,
                 "upPrice": 25,
                 "weight": 4 
             },
             {
                 "level": 2,
-                "time": 1.5,
+                "time": 0.2,
                 "upPrice":  35,
                 "weight": 5
             },
             {
                 "level": 3,
-                "time": 1,
+                "time": 0.1,
                 "upPrice": 50,
                 "weight": 7
             }

@@ -2,7 +2,6 @@ import TaskRow from "../Task/TaskRow";
 import data from '../../data.json';
 
 function ReCraft(){
-    
     return(
         <>
             {data.products.map((p) => {
@@ -17,5 +16,4 @@ function ReCraft(){
         </>
     )
 }
-
 export default ReCraft;

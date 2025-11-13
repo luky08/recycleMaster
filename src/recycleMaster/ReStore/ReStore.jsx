@@ -6,7 +6,6 @@ function ReStore(){
     return(
         <>
             {data.products.map((p) => (
-                
                 <ReStoreRow 
                     key={p.id}
                     productData={p}

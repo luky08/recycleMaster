@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import './RecycleMasterProgress.css';
 
 function RecycleMasterProgress() {
-    const progress = useSelector((s) => s.game.endGameProgress);
+    const progress = useSelector((s) => s.game.XpProgress);
     const vin = progress >= 100;
 
     return (

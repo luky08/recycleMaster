@@ -161,14 +161,13 @@ function TaskRow({
       >
         <img src={`assets/${data.imgName}`} alt={data.imgAlt} />
       </div>
-
       <div 
         onClick={handleCraft}
         className="middle"
       >
         <div className="text">
           <div>
-            {levelData.level} lvl - {data.taskName}
+            {levelData.level} lvl - {data.taskName} {data.rePoint && <>, {data.rePoint} xp </>}
           </div>
           <div>
             {levelData.weightFirst && <> <TrashInfo weight={levelData.weightFirst} name={data.trashNameFirst} /></>}

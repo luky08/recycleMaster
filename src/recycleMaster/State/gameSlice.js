@@ -7,14 +7,12 @@ const bottleKey = "bottle";
 const notebookKey = "notebook";
 
 const initialState = {
-  alertsStore: {},
-
   waste: 0,
-  readyWaste: 0,
-  money: 50,
-  plastic: 50,
-  glass: 0,
-  paper: 0,
+  readyWaste: 1,
+  money: 70,
+  plastic: 20,
+  glass: 20,
+  paper: 20,
 
   tshirt: 0,
   bottle: 0,
@@ -22,7 +20,7 @@ const initialState = {
   window: 0,
 
   levels: {},
-  endGameProgress: 0,
+  XpProgress: 0,
 
   errorDuringTransport: false,
   errorDuringSorting: false,
@@ -34,6 +32,7 @@ const initialState = {
     message: null,
     name: null,
   },
+  alertsStore: {},
 };
 
 const gameSlice = createSlice({
@@ -74,13 +73,15 @@ const gameSlice = createSlice({
         state.readyWaste -= weight;
         state.errorDuringSorting = false;
       } else {
-        state.errorDuringSorting = false;
+        state.errorDuringSorting = true;
       }
+      console.log(state.errorDuringSorting);
     },
     finishSorting(state, action) {
       const { weight } = action.payload;
       const numbers = getRandomNumberForSorting(weight);
       if (!state.errorDuringSorting) {
+        console.log(state.errorDuringSorting);
         updateWasteState();
       }
 
@@ -149,7 +150,7 @@ const gameSlice = createSlice({
 
       if (!state.errorDuringOperation) {
         increaseNumber();
-        state.endGameProgress += rePoint;
+        state.XpProgress += rePoint;
       }
       state.errorDuringOperation = false;
 

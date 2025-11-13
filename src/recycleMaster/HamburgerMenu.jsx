@@ -11,8 +11,8 @@ function HamburgerComponent(){
     const [open, setOpen] = useState(false)
     const [visible, setVisible] = useState(false);
     const [activeSection, setActiveSection] = useState(null);
-    const endGameProgress = useSelector((s) => s.game.endGameProgress)
-    const win = endGameProgress >= 100;
+    const XpProgress = useSelector((s) => s.game.XpProgress)
+    const win = XpProgress >= 100;
     const styleWin = !win ? { filter: 'grayscale(100%)' } : {};
     
     useEffect(() => {
@@ -40,6 +40,7 @@ function HamburgerComponent(){
         aria-hidden={!open}
             >
             <User/>
+            <div className="all-xp"> Total XP: {XpProgress}</div>
             <a className="link" onClick={() => toggleSection("achievement")}>
                 <AchievementSvg/>
                 Achievement

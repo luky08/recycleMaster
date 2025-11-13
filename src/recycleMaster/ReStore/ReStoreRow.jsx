@@ -21,7 +21,6 @@ function ReStoreRow({
         }
         dispatch(sellProduct(sellPayload))
     }
-
     useEffect(() => {
       if (!alert) return;
       const t = setTimeout(() => {
